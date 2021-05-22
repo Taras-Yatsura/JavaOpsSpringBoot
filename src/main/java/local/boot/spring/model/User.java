@@ -15,10 +15,13 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@ToString(callSuper = true, exclude = {"password"})
+@ToString(callSuper = true,
+          exclude = {"password"})
 public class User extends AbstractPersistable<Integer> {
 
-    @Column(name = "email", nullable = false, unique = true)
+    @Column(name = "email",
+            nullable = false,
+            unique = true)
     @Email
     @NotEmpty
     @Size(max = 128)
@@ -37,7 +40,10 @@ public class User extends AbstractPersistable<Integer> {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "role"}, name = "user_roles_unique")})
+    @CollectionTable(name = "user_role",
+                     joinColumns = @JoinColumn(name = "user_id"),
+                     uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "role"},
+                                                            name = "user_roles_unique")})
     @Column(name = "role")
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<Role> roles;
